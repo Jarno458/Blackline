@@ -22,7 +22,7 @@ namespace Blackline.Data
 				{ 1,  new Document
 				{
 					Id = 1,
-					Owner = "owner@woltherskluwer.com",
+					Owner = "management@management.nl",
 					Content = "This is a testing message from Jarno Westhof, Its content is inrelavant, do not read this message, contact: phone 0612345678",
 					SensativeInfomationTypes = new []{ SensativeInfomation.PhoneNumber },
 					Shares = new Dictionary<string, Share>
@@ -40,51 +40,29 @@ namespace Blackline.Data
 						}
 					}
 				}},
-				{ 2, new Document
-				{
-					Id = 2,
-					Owner = "jarno.westhof@woltherskluwer.com",
-					Content = "something testing something",
-					SensativeInfomationTypes = new SensativeInfomation[0],
-					Shares = new Dictionary<string, Share>
-					{
-						{
-							"",
-							new Share
-							{
-								BlackLines = new []
-								{
-									new BlackLine { Type = BlackLineType.Personal, Text = "something" },
-								}
-							}
-						}
-					}
-				}},
 				{ 3, new Document
 				{
 					Id = 3,
-					Owner = "owner@woltherskluwer.com",
+					Owner = "management@management.nl",
 					Content = LoadFromFile(@"Data\LetterOfAgreement.html"),
 					SensativeInfomationTypes = new []{ SensativeInfomation.PostalCode },
 					Shares = new Dictionary<string, Share>
 					{
 						{
-							"jarno.westhof@woltherskluwer.com",
+							"employee@employee.nl",
 							new Share
 							{
 								BlackLines = new []
 								{
-									new BlackLine { Type = BlackLineType.Personal, Text = "Lighthouse NV" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "Mainstreet 12" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "1234 AB" },
+									new BlackLine { Type = BlackLineType.Personal, Text = "1212345678" },
+									new BlackLine { Type = BlackLineType.Critical, Text = "€ 1000,-" },
 									new BlackLine { Type = BlackLineType.Personal, Text = "Frank" },
 									new BlackLine { Type = BlackLineType.Personal, Text = "Anna" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "1212345678" },
 								}
 							}
 						},
 						{
-							"Freddy.Nijzink@wolterskluwer.com",
+							"client@client.nl",
 							new Share
 							{
 								BlackLines = new []
@@ -93,37 +71,9 @@ namespace Blackline.Data
 									new BlackLine { Type = BlackLineType.Personal, Text = "Mainstreet 12" },
 									new BlackLine { Type = BlackLineType.Personal, Text = "1234 AB" },
 									new BlackLine { Type = BlackLineType.Personal, Text = "Amsterdam" },
-									new BlackLine { Type = BlackLineType.Critical, Text = "€ 1000,-" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "1212345678" },
 								}
 							}
 						},
-						{
-							"ahmet.bektes@wolterskluwer.com",
-							new Share
-							{
-								BlackLines = new []
-								{
-									new BlackLine { Type = BlackLineType.Personal, Text = "Amsterdam" },
-									new BlackLine { Type = BlackLineType.Critical, Text = "€ 1000,-" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "Frank" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "Anna" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "1212345678" },
-								}
-							}
-						},
-						{
-							"Wytze.Sijtsma@wolterskluwer.com",
-							new Share
-							{
-								BlackLines = new []
-								{
-									new BlackLine { Type = BlackLineType.Personal, Text = "Frank" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "Anna" },
-									new BlackLine { Type = BlackLineType.Personal, Text = "1212345678" },
-								}
-							}
-						}
 					}
 				}}
 			};
