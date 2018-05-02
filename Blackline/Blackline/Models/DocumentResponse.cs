@@ -36,7 +36,7 @@ namespace Blackline.Models
 
 		static string CreateBlackout(BlackLineType type, int size)
 		{
-			return $@"<span class=""blacked {type.ToString().ToLower()}"">{string.Concat(Enumerable.Repeat("&nbsp;", size))}</span>";
+			return $@"<span class=""blacked {type.ToString().ToLower()}"">{string.Concat(Enumerable.Repeat("&nbsp;", size * 2))}</span>";
 		}
 	}
 }
