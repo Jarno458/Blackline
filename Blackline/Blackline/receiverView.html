@@ -68,7 +68,9 @@
 	
 <script>
 	$( document ).ready(function() {
-		console.log("ready!");
+
+
+
 		$.get( "api/document/", { id: "3" } )
 			.done(function (data) {
 				html = $.parseHTML(data.Content);
