@@ -233,16 +233,16 @@
     <Content Include="Data\Documents.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="HTML\.DS_Store" />
+    <Content Include=".DS_Store" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="HTML\CSS\main.css" />
-    <Content Include="HTML\CSS\normalize.css" />
-    <Content Include="HTML\JS\main.js" />
-    <Content Include="HTML\JS\plugins.js" />
-    <Content Include="HTML\JS\vendor\jquery-3.2.1.min.js" />
-    <Content Include="HTML\JS\vendor\modernizr-3.5.0.min.js" />
-    <Content Include="HTML\login.html" />
+    <Content Include="CSS\main.css" />
+    <Content Include="CSS\normalize.css" />
+    <Content Include="JS\main.js" />
+    <Content Include="JS\plugins.js" />
+    <Content Include="JS\vendor\jquery-3.2.1.min.js" />
+    <Content Include="JS\vendor\modernizr-3.5.0.min.js" />
+    <Content Include="login.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
