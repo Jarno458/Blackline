@@ -65,12 +65,12 @@
 
 				// Put the results in a div
 				posting.done(function( data ) {
-					var content = $( data ).find( "#message" );
+					var content = $( data ).find( "#Message" );
 					//if (content == "ok") redirect with parameters?  
 				});
 
 				posting.fail(function( data ) {
-						var content = "please retry";
+					var content = data.responseJSON.Message;
 						$("#result").empty().append(content);
 					});
 
