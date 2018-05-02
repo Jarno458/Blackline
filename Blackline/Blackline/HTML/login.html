@@ -1,4 +1,4 @@
-
+﻿
 
 <!doctype html>
 <html class="no-js" lang="">
@@ -19,18 +19,12 @@
     <body>
       <div class="login-page">
         <div class="form">
-          <form class="register-form">
-            <input type="text" placeholder="name"/>
-            <input type="password" placeholder="password"/>
-            <input type="text" placeholder="email address"/>
-            <button>create</button>
-            <p class="message">Already registered? <a href="#">Sign In</a></p>
-          </form>
-          <form class="login-form">
-            <input type="text" placeholder="username"/>
-            <input type="password" placeholder="password"/>
+
+          <form id='login-form' class="login-form">
+            <input id='user' type="text" placeholder="username"/>
+            <input id='password' type="password" placeholder="password"/>
             <button>login</button>
-            <p class="message">Not registered? <a href="#">Create an account</a></p>
+			 	<div id="result" class='message'></div>
           </form>
         </div>
       </div>
@@ -48,9 +42,44 @@
 
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
         <script>
-            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+	        window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+	        ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
         </script>
-        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-    </body>
+		<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+		 
+	<script>
+			// Attach a submit handler to the form
+			  $( "#login-form" ).submit(function( event ) {
+ 
+				// Stop form from submitting normally
+				event.preventDefault();
+ 
+				// Get some values from elements on the page:
+					var username = $("#user").val();
+					var password = $("#password").val();
+					url = 'api/account/login';
+
+			
+				// Send the data using post
+					var posting = $.post(url, { username: username, password: password });
+
+				// Put the results in a div
+				posting.done(function( data ) {
+					var content = $( data ).find( "#message" );
+					//if (content == "ok") redirect with parameters?  
+				});
+
+				posting.fail(function( data ) {
+						var content = "please retry";
+						$("#result").empty().append(content);
+					});
+
+
+			});
+	</script>
+		 
+
+	</body>
 </html>
+
+
