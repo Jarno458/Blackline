@@ -69,13 +69,17 @@
 <script>
 	$( document ).ready(function() {
 
-
-
-		$.get( "api/document/", { id: "3" } )
+		$.ajax({
+			url: "api/document/3",
+				beforeSend: function( xhr ) {
+					xhr.setRequestHeader("Authorization", "Basic " + btoa("employee@employee.nl" + ":" + ""));
+				}
+			})
 			.done(function (data) {
 				html = $.parseHTML(data.Content);
 				$('#index').empty().append(html);
 			});
+
 	});
 </script>
 
