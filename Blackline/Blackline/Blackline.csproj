@@ -238,6 +238,13 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="CSS\main.css" />
     <Content Include="CSS\normalize.css" />
+    <Content Include="CSS\materialize.css" />
+    <Content Include="CSS\materialize.min.css" />
+    <Content Include="CSS\style.css" />
+    <Content Include="JS\init.js" />
+    <Content Include="JS\materialize.js" />
+    <Content Include="JS\materialize.min.js" />
+    <Content Include="receiverView.html" />
     <Content Include="JS\main.js" />
     <Content Include="JS\plugins.js" />
     <Content Include="JS\vendor\jquery-3.2.1.min.js" />

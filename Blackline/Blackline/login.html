@@ -20,13 +20,13 @@
       <div class="login-page">
         <div class="form">
 
-          <form id='login-form' class="login-form">
-            <input id='user' type="text" placeholder="username"/>
-            <input id='password' type="password" placeholder="password"/>
-            <button>login</button>
-			 	<div id="result" class='message'></div>
-          </form>
-        </div>
+				<form id='login-form' class="login-form">
+					<input id='user' type="text" placeholder="username"/>
+					<input id='password' type="password" placeholder="password"/>
+					<button>login</button>
+					<div id="result" class='message'></div>
+				</form>
+			</div>
       </div>
 
         <!--[if lte IE 9]>
@@ -65,8 +65,7 @@
 
 				// Put the results in a div
 				posting.done(function( data ) {
-					var content = $( data ).find( "#Message" );
-					//if (content == "ok") redirect with parameters?  
+					window.location.href = "/receiverView.html";
 				});
 
 				posting.fail(function( data ) {
