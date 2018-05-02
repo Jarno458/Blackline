@@ -64,7 +64,9 @@
 					var posting = $.post(url, { UserName: username, Password: password });
 
 				// Put the results in a div
-				posting.done(function( data ) {
+				posting.done(function (data) {
+					sessionStorage.setItem('username', username);
+
 					window.location.href = "/receiverView.html";
 				});
 

@@ -72,7 +72,7 @@
 		$.ajax({
 			url: "api/document/3",
 				beforeSend: function( xhr ) {
-					xhr.setRequestHeader("Authorization", "Basic " + btoa("employee@employee.nl" + ":" + ""));
+					xhr.setRequestHeader("Authorization", "Basic " + btoa(sessionStorage.getItem('username') + ":" + ""));
 				}
 			})
 			.done(function (data) {

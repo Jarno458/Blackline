@@ -24,9 +24,11 @@ namespace Blackline.Models
 		{
 			var content = document.Content;
 
-			var blacklines = document.Shares.ContainsKey(email) 
-				? document.Shares[email].BlackLines 
-				: document.Shares.Values.SelectMany(s => s.BlackLines).DistinctBy(b => b.Text);
+			var blacklines = email == document.Owner
+				? new Data.BlackLine[0]
+				: document.Shares.ContainsKey(email) 
+					? document.Shares[email].BlackLines 
+					: document.Shares.Values.SelectMany(s => s.BlackLines).DistinctBy(b => b.Text);
 			
 			foreach (var blackLine in blacklines)
 				content = content.Replace(blackLine.Text, CreateBlackout(blackLine.Type, blackLine.Length));
