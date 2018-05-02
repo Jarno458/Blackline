@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using Blackline.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -335,6 +337,21 @@ namespace Blackline.Controllers
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/Login
+        [AllowAnonymous]
+        [Route("Login")]
+        public IHttpActionResult Login(Login user)
+        {
+            var users = new UserStore().GetUsers();
+            var registeredUser = users.FirstOrDefault(x => x.UserName == user.UserName);
+            if (registeredUser == null || registeredUser.Password != user.Password)
+            {
+                return BadRequest("Invalid user or password!");
             }
 
             return Ok();

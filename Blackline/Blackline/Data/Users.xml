@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<users>
+  <user>
+    <userName>client@client.nl</userName>
+    <password>client</password>
+    <level>1</level>
+  </user>
+  <user>
+    <userName>employee@employee.nl</userName>
+    <password>employee</password>
+    <level>2</level>
+  </user>
+  <user>
+    <userName>management@management.nl</userName>
+    <password>management</password>
+    <level>3</level>
+  </user>
+</users>

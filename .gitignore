@@ -236,3 +236,64 @@ _Pvt_Extensions
 .fake/
 Output/*
 Source/.idea/
+# Windows
+Thumbs.db
+
+# Visual Studio
+*.obj
+*.exe
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+[Tt]est[Rr]esult*
+*.tmp
+*.chw
+*.dotCover
+*.debug.css
+_ReSharper*
+
+# Acceptance
+!Acceptance/chromedriver.exe
+!Acceptance/IEDriverServer.exe
+
+# Ignore certain folders
+.idea
+.vs
+*.iml
+node_modules
+Output/
+/Packages/
+/Packages/!Repositories.config
+
+/Source/Tools/Admin.UI/Content/Imports
+/Source/Tools/Admin.UI/Scripts/Imports
+/Source/Tools/Admin/App_Data/Temp
+/Source/Web/Web.Api/Content/Imports
+/Source/Web/Web.Api/IISFunctions.ps1
+/Source/Web/Web.Api/Microsoft.Web.Administration.dll
+/Source/Web/Web.Api/Scripts/Imports
+/Source/Web/Web.Api/ServiceModule.ps1
+
+# Tools
+/Tools/FeatureToggle/packages
+!Tools/NUnit/**
+
+# nuspec files
+!Deployment/Packages/**
