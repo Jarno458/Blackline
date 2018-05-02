@@ -13,27 +13,31 @@ namespace Blackline.Controllers
 	{
 		public IHttpActionResult Get(int id)
 		{
-			var document = DocumentStore.Documents[id];
-
-			if (document == null)
+			if(!DocumentStore.Documents.ContainsKey(id))
 				return Content(HttpStatusCode.NotFound, "Document does not exsist");
 
-			return Content(HttpStatusCode.OK, DocumentResponse.FromDocument(document , GetUserEmail()));
+			return Content(HttpStatusCode.OK, DocumentResponse.FromDocument(DocumentStore.Documents[id], GetUserEmail()));
 		}
 
 		[HttpPost]
 		[ActionName("Share")]
 		public IHttpActionResult Share(int id, string email, [FromBody] BlackLineModel blacklines)
 		{
-			if(blacklines == null)
+			if (!DocumentStore.Documents.ContainsKey(id))
+				return Content(HttpStatusCode.NotFound, "Document does not exsist");
+
+			if (blacklines == null)
 				return Content(HttpStatusCode.BadRequest, @"plz provide the required blacklines or this user as post data { BlackLines: [ { type: ""personal"", text: ""text"" }, n ] }");
 
+			var document = DocumentStore.Documents[id];
+			if (document.Owner != GetUserEmail())
+				return Content(HttpStatusCode.Forbidden, @"only the document owner can change the sharing permisions");
+			
 			var share = new Share
 			{
-				BlackLines = blacklines.BlackLines.Select(b => new BlackLine {Type = ParseInformationType(b.Type), Text = b.Text})
+				BlackLines = blacklines.BlackLines.Select(b => new BlackLine { Type = ParseInformationType(b.Type), Text = b.Text })
 			};
 
-			var document = DocumentStore.Documents[id];
 			document.Shares[email] = share;
 
 			DocumentStore.Save();
@@ -62,13 +66,13 @@ namespace Blackline.Controllers
 				int seperatorIndex = usernamePassword.IndexOf(':');
 
 				var username = usernamePassword.Substring(0, seperatorIndex);
-				var password = usernamePassword.Substring(seperatorIndex + 1);
+				//var password = usernamePassword.Substring(seperatorIndex + 1);
 
 				return username;
 			}
 			else
 			{
-				return "";
+				return "UNKNOWN";
 			}
 		}
 	}

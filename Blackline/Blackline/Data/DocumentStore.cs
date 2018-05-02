@@ -11,17 +11,16 @@ namespace Blackline.Data
 
 		static DocumentStore()
 		{
-			Documents = LoadDocuments();
+			Documents = Load() ?? DefaultDocuments();
 
 			DetectSensitiveInformation(Documents.Values);
 		}
 
-		static Dictionary<int, Document> LoadDocuments()
+		static Dictionary<int, Document> DefaultDocuments()
 		{
 			return new Dictionary<int, Document> {
 				{ 1,  new Document
 				{
-					Id = 1,
 					Owner = "management@management.nl",
 					Content = "This is a testing message from Jarno Westhof, Its content is inrelavant, do not read this message, contact: phone 0612345678",
 					SensativeInfomationTypes = new []{ SensativeInfomation.PhoneNumber },
@@ -42,7 +41,6 @@ namespace Blackline.Data
 				}},
 				{ 3, new Document
 				{
-					Id = 3,
 					Owner = "management@management.nl",
 					Content = LoadFromFile(@"Data\LetterOfAgreement.html"),
 					SensativeInfomationTypes = new []{ SensativeInfomation.PostalCode },
@@ -104,6 +102,9 @@ namespace Blackline.Data
 			if (Regex.IsMatch(content, @"([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)"))
 				sensitiveInformationTypes.Add(SensativeInfomation.Email);
 
+			if (Regex.IsMatch(content, @"[€$]?\s?[0-9]+[.,]([0-9]|-)+"))
+				sensitiveInformationTypes.Add(SensativeInfomation.Money);
+			
 			return sensitiveInformationTypes;
 		}
 
@@ -121,7 +122,21 @@ namespace Blackline.Data
 			}
 		}
 
-		public static void Save()
+		static Dictionary<int, Document> Load()
+		{
+			try
+			{
+				var file = GetFilePath(@"Data\Documents.json");
+				using (StreamReader reader = new StreamReader(file))
+					return JsonConvert.DeserializeObject<Dictionary<int, Document>>(reader.ReadToEnd());
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+		internal static void Save()
 		{
 			try
 			{
@@ -142,7 +157,6 @@ namespace Blackline.Data
 
 	public class Document
 	{
-		public int Id;
 		public string Content;
 		public string Owner;
 		public IEnumerable<SensativeInfomation> SensativeInfomationTypes;
@@ -154,7 +168,8 @@ namespace Blackline.Data
 		PhoneNumber,
 		PostalCode,
 		IBan,
-		Email
+		Email,
+		Money
 	}
 
 	public class Share
