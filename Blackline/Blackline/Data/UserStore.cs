@@ -16,9 +16,7 @@ namespace Blackline.Data
 
         private static IList<User> GetUsersCore()
         {
-            var applicationPath = Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) ?? string.Empty;
-            var path = Path.Combine(applicationPath.Replace(@"file:\", string.Empty), @"Data\Users.xml");
+            var path = GetFilePath(@"Data\Users.xml");
             
             var serializer = new XmlSerializer(typeof(Users));
             using (FileStream fileStream = new FileStream(path, FileMode.Open))
@@ -26,5 +24,10 @@ namespace Blackline.Data
                 return ((Users) serializer.Deserialize(fileStream)).UserList;
             }
         }
-    }
+
+	    static string GetFilePath(string path)
+	    {
+		    return Path.Combine(System.Web.HttpRuntime.BinDirectory, path);
+	    }
+	}
 }
