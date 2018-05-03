@@ -55,6 +55,8 @@ namespace Blackline.Data
 									new BlackLine { Type = BlackLineType.Critical, Text = "€ 1000,-" },
 									new BlackLine { Type = BlackLineType.Personal, Text = "Frank" },
 									new BlackLine { Type = BlackLineType.Personal, Text = "Anna" },
+									new BlackLine { Type = BlackLineType.Personal, Text = "020-5432238" },
+									new BlackLine { Type = BlackLineType.Personal, Text = "NL31INGB0673583801" },
 								}
 							}
 						},

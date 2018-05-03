@@ -9,7 +9,7 @@ namespace Blackline.Data
 		static readonly Dictionary<SensativeInfomation, IEnumerable<Regex>> Regexes = new Dictionary<SensativeInfomation, IEnumerable<Regex>>
 		{
 			{SensativeInfomation.PostalCode, new[] {new Regex(@"(?<value>[1-9][0-9]{3}\s?[A-Za-z]{2})")}},
-			{SensativeInfomation.IBan, new[] {new Regex(@"(?<value>[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}[a-zA-Z0-9]?{0,16})")}},
+			{SensativeInfomation.IBan, new[] {new Regex(@"(?<value>[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}[a-zA-Z0-9]{0,16})")}},
 			{
 				SensativeInfomation.PhoneNumber, new[]
 				{
