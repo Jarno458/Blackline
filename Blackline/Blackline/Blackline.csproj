@@ -210,6 +210,7 @@
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Data\BlackLineType.cs" />
     <Compile Include="Data\DocumentStore.cs" />
+    <Compile Include="Data\InformationDetection.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\Login.cs" />
@@ -218,7 +219,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BlackLineModel.cs" />
+    <Compile Include="Models\DocumentShareModel.cs" />
     <Compile Include="Models\DocumentResponse.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
