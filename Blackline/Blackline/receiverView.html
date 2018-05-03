@@ -134,6 +134,8 @@
 <script>
 	$( document ).ready(function() {
 
+		$('#share').hide();
+
 		$.ajax({
 				url: "api/document/3",
 				beforeSend: function( xhr ) {
@@ -143,19 +145,13 @@
 			.done(function (data) {
 				html = $.parseHTML(data.Content);
 				$('#index').empty().append(html);
-			});
 
+				if (sessionStorage.getItem('username') === data.Owner)
+					$('#share').show();
+
+			});
 		
 		$('.modal').modal();
-
-
-		if (sessionStorage.getItem('username') == 'management@management.nl')
-		{
-			$('#share').show();
-		} else {
-			$('#share').hide();
-		}
-
 
 	});
 
@@ -172,28 +168,27 @@
 			var autodetects = [];
 
 			if (emailChecked)
-				autodetects.push(' Email');
+				autodetects.push('Email');
 
 			if (telephoneChecked)
-				autodetects.push(' PhoneNumber');
+				autodetects.push('PhoneNumber');
 
 			if (ibanChecked)
-				autodetects.push(' IBan');
+				autodetects.push('IBan');
 
 			if (cpChecked)
-				autodetects.push(' PostalCode');
+				autodetects.push('PostalCode');
 
 			if (amountsChecked)
-				autodetects.push(' Money');
+				autodetects.push('Money');
 
 			//var url = '/api/Document/Share';
 
 
 
 			var payload={
-				"Email": email,
-				"AutoDetects": autodetects,
-				"CustomBlackLines": null
+				"Email": username,
+				"AutoDetects": autodetects
 			}
 
 			console.log('posting...');
@@ -201,11 +196,12 @@
 			$.ajax({
 				url: "api/document/3/share",
 				type: "POST",
-				data:  payload ,
+				data: JSON.stringify(payload),
+				contentType: "application/json",
+				dataType: "json",
 				beforeSend: function (xhr) {
 					xhr.setRequestHeader("Authorization", "Basic " + btoa(sessionStorage.getItem('username') + ":" + ""));
-
-					}
+				}
 				})
 				.done(function (data) {
 					alert('222');

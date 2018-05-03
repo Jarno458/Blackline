@@ -28,10 +28,10 @@ namespace Blackline.Controllers
 				return Content(HttpStatusCode.NotFound, @"Document does not exsist");
 
 			if (shareModel == null)
-				return Content(HttpStatusCode.BadRequest, @"plz provide the required shareModel as post data { ""Emnail"": ""mail@mail.com"", ""AutoDetects"": [ ""Money"", ""PostalCode"", n ], ""CustomBlackLines"": [ { type: ""personal"", text: ""text"" }, n ] }");
+				return Content(HttpStatusCode.BadRequest, @"plz provide the required shareModel as post data { ""Email"": ""mail@mail.com"", ""AutoDetects"": [ ""Money"", ""PostalCode"", n ], ""CustomBlackLines"": [ { type: ""personal"", text: ""text"" }, n ] }");
 
 			if(string.IsNullOrEmpty(shareModel.Email))
-				return Content(HttpStatusCode.BadRequest, @"plz provide the required shareModel as post data { ""Emnail"": ""mail@mail.com"", ""AutoDetects"": [ ""Money"", ""PostalCode"", n ], ""CustomBlackLines"": [ { type: ""personal"", text: ""text"" }, n ] }");
+				return Content(HttpStatusCode.BadRequest, @"plz provide the required shareModel as post data { ""Email"": ""mail@mail.com"", ""AutoDetects"": [ ""Money"", ""PostalCode"", n ], ""CustomBlackLines"": [ { type: ""personal"", text: ""text"" }, n ] }");
 
 			var document = DocumentStore.Documents[id];
 			if (document.Owner != GetUserEmail())
