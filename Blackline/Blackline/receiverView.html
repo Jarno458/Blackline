@@ -29,25 +29,29 @@
 
 	
 	<div class='container'>
-		<div class="card col s6 offset-s6" id="index">
+		<div class="card col s6 offset-s6" >
+			<div class='container'>
+				<div id="index"></div>
+			</div>
 		</div>
 	</div>
 
+	
+	
+<!-- Modal Trigger -->
+<button data-target="modal1" class="btn modal-trigger">Modal</button>
+          
 
-
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal bottom-sheet">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet">
+	<div class="modal-content">
+		<h4>Modal Header</h4>
+		<p>A bunch of text</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+	</div>
+</div>
 
 
   <footer class="page-footer green">
@@ -79,6 +83,10 @@
 				html = $.parseHTML(data.Content);
 				$('#index').empty().append(html);
 			});
+
+		
+			$('.modal').modal();
+	
 
 	});
 </script>
