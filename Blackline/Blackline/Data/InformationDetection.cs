@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
+using Microsoft.Ajax.Utilities;
 
 namespace Blackline.Data
 {
@@ -8,7 +11,7 @@ namespace Blackline.Data
 	{
 		static readonly Dictionary<SensativeInfomation, IEnumerable<Regex>> Regexes = new Dictionary<SensativeInfomation, IEnumerable<Regex>>
 		{
-			{SensativeInfomation.PostalCode, new[] {new Regex(@"(?<value>[1-9][0-9]{3}\s?[A-Za-z]{2})")}},
+			{SensativeInfomation.PostalCode, new[] {new Regex(@"(?<value>[1-9][0-9]{3}\s?[A-Z]{2})")}},
 			{SensativeInfomation.IBan, new[] {new Regex(@"(?<value>[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}[a-zA-Z0-9]{0,16})")}},
 			{
 				SensativeInfomation.PhoneNumber, new[]
@@ -18,7 +21,7 @@ namespace Blackline.Data
 				}
 			},
 			{SensativeInfomation.Email, new[] { new Regex(@"(?<value>[\w-\.]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|([\w-]+\.+))[a-zA-Z]{2,4}|[0-9]{1,3}\]?)")}},
-			{SensativeInfomation.Money, new[] {new Regex(@"(?<value>[€$]?\s?[0-9]+[.,]([0-9]|-)+)")}}
+			{SensativeInfomation.Money, new[] {new Regex(@"(?<value>[€$]\s?[0-9]+[.,]([0-9]|-)+)")}}
 		};
 
 		public static IEnumerable<SensativeInfomation> ExtractSensitiveInformationTypes(string content)
@@ -37,6 +40,8 @@ namespace Blackline.Data
 		{
 			var blacklines = new List<BlackLine>();
 
+			var contentFromInsideSpans = GetContentFromInsideSpans(content).Replace("&nbsp;", "");
+
 			foreach (var informationType in sensativeInfomations)
 			{
 				if(informationType == SensativeInfomation.None)
@@ -46,7 +51,7 @@ namespace Blackline.Data
 
 				foreach (var regex in regexes)
 				{
-					var result = regex.Matches(content);
+					var result = regex.Matches(contentFromInsideSpans);
 
 					var blacklineType = GetBlacklineType(informationType);
 
@@ -55,7 +60,22 @@ namespace Blackline.Data
 				}
 			}
 
-			return blacklines;
+			return blacklines.DistinctBy(b => b.Text);
+		}
+
+		static string GetContentFromInsideSpans(string content)
+		{
+			StringBuilder builder = new StringBuilder();
+
+			Regex r = new Regex(@"<span.*?>([^<]*)<\/span>", RegexOptions.IgnoreCase);
+
+			foreach (Match matchedSpan in r.Matches(content))
+			{
+				string capture = matchedSpan.Groups[1].Value;
+				builder.Append(capture);
+			}
+
+			return builder.ToString();
 		}
 
 		static BlackLineType GetBlacklineType(SensativeInfomation informationType)

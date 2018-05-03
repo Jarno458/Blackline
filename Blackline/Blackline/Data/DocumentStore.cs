@@ -86,8 +86,6 @@ namespace Blackline.Data
 			}
 		}
 
-
-
 		static string LoadFromFile(string path)
 		{
 			try
