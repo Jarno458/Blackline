@@ -16,7 +16,7 @@
 <body>
   <nav class="green lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Blackline</a>
-      <ul class="right hide-on-med-and-down">
+      <ul id='share' class="right hide-on-med-and-down">
         <li><a href="#">Share Document</a></li>
       </ul>
 
@@ -85,8 +85,16 @@
 			});
 
 		
-			$('.modal').modal();
-	
+		$('.modal').modal();
+
+
+		if (sessionStorage.getItem('username') == 'management@management.nl')
+		{
+			$('#share').show();
+		} else {
+			$('#share').hide();
+		}
+
 
 	});
 </script>
