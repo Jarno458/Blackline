@@ -24,9 +24,10 @@ namespace Blackline.Models
 		{
 			var content = document.Content;
 
-			var blacklines = email == document.Owner
-				? new Data.BlackLine[0]
-				: document.Shares.ContainsKey(email) 
+			if (email == document.Owner)
+				return content;
+
+			var blacklines = document.Shares.ContainsKey(email) 
 					? document.Shares[email].BlackLines 
 					: document.Shares.Values.SelectMany(s => s.BlackLines).DistinctBy(b => b.Text);
 			
@@ -38,7 +39,12 @@ namespace Blackline.Models
 
 		static string CreateBlackout(BlackLineType type, int size)
 		{
-			return $@"<span class=""blacked {type.ToString().ToLower()}"">{string.Concat(Enumerable.Repeat("&nbsp;", size * 2))}</span>";
+			return $@"<span class=""blacked {type.ToString().ToLower()}"">{GetBlackoutSpaces(size)}</span>";
+		}
+
+		static string GetBlackoutSpaces(int size)
+		{
+			return string.Concat(Enumerable.Repeat("&nbsp;", size * 2));
 		}
 	}
 }

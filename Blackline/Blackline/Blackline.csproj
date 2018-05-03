@@ -208,7 +208,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\BlackLineType.cs" />
     <Compile Include="Data\DocumentStore.cs" />
     <Compile Include="Models\User.cs" />
