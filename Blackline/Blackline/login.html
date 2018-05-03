@@ -57,9 +57,11 @@
 				// Get some values from elements on the page:
 					var username = $("#user").val();
 					var password = $("#password").val();
-					url = '/api/Account/Login';
+					var url = '/api/Account/Login';
 
-			
+
+					
+
 				// Send the data using post
 					var posting = $.post(url, { UserName: username, Password: password });
 
