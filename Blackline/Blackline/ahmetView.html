@@ -1,0 +1,88 @@
+﻿
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Starter Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="./css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="./css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	
+
+
+</head>
+<body>
+  <nav class="green lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Blackline</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Share Document</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Share Document</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+	
+	<div class='container'>
+		<div class="card col s6 offset-s6" id="index">
+		</div>
+	</div>
+
+
+
+  <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
+
+  <footer class="page-footer green">
+
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="#">Blackline</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="./JS/materialize.js"></script>
+<script src="./JS/init.js"></script>
+	
+<script>
+	$( document ).ready(function() {
+
+		$.ajax({
+			url: "api/document/3",
+				beforeSend: function( xhr ) {
+					xhr.setRequestHeader("Authorization", "Basic " + btoa(sessionStorage.getItem('username') + ":" + ""));
+				}
+			})
+			.done(function (data) {
+				html = $.parseHTML(data.Content);
+				$('#index').empty().append(html);
+			});
+
+	});
+</script>
+
+
+</body>
+</html>
