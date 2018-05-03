@@ -40,11 +40,10 @@ namespace Blackline.Controllers
 			var blacklines = new List<BlackLine>();
 
 			if (shareModel.CustomBlackLines != null)
-				blacklines.AddRange(
-					shareModel.CustomBlackLines.Select(b => new BlackLine {Type = ParseBlacklineType(b.Type), Text = b.Text}));
+				blacklines.AddRange(shareModel.CustomBlackLines.Select(b => new BlackLine {Type = ParseBlacklineType(b.Type), Text = b.Text}));
 
 			if (shareModel.AutoDetects != null)
-				InformationDetection.GenerateBlackLinesForContent(document.Content, ParseInformationType(shareModel.AutoDetects));
+				blacklines.AddRange(InformationDetection.GenerateBlackLinesForContent(document.Content, ParseInformationType(shareModel.AutoDetects)));
 
 			document.Shares[shareModel.Email.ToLower()] = new Share { BlackLines = blacklines };
 			
