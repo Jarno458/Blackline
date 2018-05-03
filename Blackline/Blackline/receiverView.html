@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+  <title>BlackLine</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -101,21 +101,39 @@
 
 
   <!-- Modal2 Structure -->
-  <div id="modal2" class="modal bottom-sheet">
-    <div class="modal-content">
-      <div class="container">
+<div id="modal2" class="modal bottom-sheet">
+	<div class="modal-content">
+		<div class="container">
 
-        <h4>Share with</h4>
-        <h5>Blackline </h5>
+			<h4>Share with</h4>
+			<h5>Blackline </h5>
 
-        </div>
+		</div>
 
-      </div>
+	</div>
 
 
-  </div>
+</div>
+	
+	
+	
+	
+	
+<button data-target="modal22" class="btn modal-trigger" id='btnOkMsg'>Modal22</button>
 
-  <footer class="page-footer green">
+<!-- Modal2 Structure -->
+<div id="modal22" class="modal">
+	<div class="modal-content">
+		<p id='userMessage'> </p>
+		<div class="modal-footer">
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+		</div>
+	</div>
+
+</div>
+
+
+<footer class="page-footer green">
 
     <div class="footer-copyright">
       <div class="container">
@@ -135,6 +153,7 @@
 	$( document ).ready(function() {
 
 		$('#share').hide();
+		$('#btnOkMsg').hide();
 
 		$.ajax({
 				url: "api/document/3",
@@ -182,10 +201,6 @@
 			if (amountsChecked)
 				autodetects.push('Money');
 
-			//var url = '/api/Document/Share';
-
-
-
 			var payload={
 				"Email": username,
 				"AutoDetects": autodetects
@@ -204,36 +219,10 @@
 				}
 				})
 				.done(function (data) {
-					alert('222');
+					//activate  ok popup
+					$('#userMessage').text ('The file is shared with ' +  $('#email').val() + ' and the document is blacklined according to your preferences.');
+					$('#btnOkMsg').click();
 				});
-
-			/*$.ajax({
-				url: "api/document/Share",
-				type: "POST",
-				data:'3'*/
-				//,
-					/*beforeSend: function( xhr ) {
-						xhr.setRequestHeader("Authorization", "Basic " + btoa(sessionStorage.getItem('username') + ":" + ""));
-					}*/
-				/*})
-				.done(function (data) {
-					
-				});*/
-
-
-			/*// Send the data using post
-			var posting = $.post(url, { id: username,  shareModel: payload});
-
-			// Put the results in a div
-			posting.done(function (data) {
-				alert('done');
-			});
-
-			posting.fail(function( data ) {
-				alert('error');
-			});
-
-			alert('Your document has been shared :)');*/
 		}
 
 
