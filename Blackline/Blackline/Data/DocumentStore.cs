@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace Blackline.Data
@@ -81,32 +80,11 @@ namespace Blackline.Data
 		{
 			foreach (var document in documents)
 			{
-				document.SensativeInfomationTypes = ExtractSensitiveInformationTypes(document.Content);
+				document.SensativeInfomationTypes = InformationDetection.ExtractSensitiveInformationTypes(document.Content);
 			}
 		}
 
-		internal static IEnumerable<SensativeInfomation> ExtractSensitiveInformationTypes(string content)
-		{
-			var sensitiveInformationTypes = new List<SensativeInfomation>();
 
-			if (Regex.IsMatch(content, @"[1-9][0-9]{3}\s?[A-Za-z]{2}"))
-				sensitiveInformationTypes.Add(SensativeInfomation.PostalCode);
-
-			if (Regex.IsMatch(content, @"[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}"))
-				sensitiveInformationTypes.Add(SensativeInfomation.IBan);
-
-			if (Regex.IsMatch(content, @"(((0)[1-9]{2}[0-9][-]?[1-9][0-9]{5})|(\\+31|0|0031)[1-9][0-9][-]?[1-9][0-9]{6})")
-				 || Regex.IsMatch(content, @"((\\+31|0|0031)6){1}\s?[1-9]{1}[0-9]{7}"))
-				sensitiveInformationTypes.Add(SensativeInfomation.PhoneNumber);
-
-			if (Regex.IsMatch(content, @"([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)"))
-				sensitiveInformationTypes.Add(SensativeInfomation.Email);
-
-			if (Regex.IsMatch(content, @"[€$]?\s?[0-9]+[.,]([0-9]|-)+"))
-				sensitiveInformationTypes.Add(SensativeInfomation.Money);
-			
-			return sensitiveInformationTypes;
-		}
 
 		static string LoadFromFile(string path)
 		{
@@ -169,7 +147,8 @@ namespace Blackline.Data
 		PostalCode,
 		IBan,
 		Email,
-		Money
+		Money,
+		None
 	}
 
 	public class Share
