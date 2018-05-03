@@ -269,6 +269,7 @@ obj/
 *.debug.css
 _ReSharper*
 .vs/
+[Pp]ackages
 
 # Acceptance
 !Acceptance/chromedriver.exe
