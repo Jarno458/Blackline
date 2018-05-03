@@ -55,40 +55,40 @@
           <h5>Blackline </h5>
           <p>
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" id='telephone'/>
               <span>Telephone</span>
             </label>
           </p>
           <p>
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" id='emailcheckbox' checked=''/>
               <span>Email</span>
             </label>
           </p>
 
           <p>
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" id='cp'/>
               <span>Postal Code</span>
             </label>
           </p>
 
           <p>
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" id='amounts'/>
               <span>Amounts</span>
             </label>
           </p>
 
           <p>
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" id='iban' />
               <span>IBAN</span>
             </label>
           </p>
 
 
-          <a class="waves-effect waves-light btn modal-close" >Share</a>
+          <a class="waves-effect waves-light btn modal-close" onclick="funcShare()" >Share</a>
 
         </form>
         </div>
@@ -135,7 +135,7 @@
 	$( document ).ready(function() {
 
 		$.ajax({
-			url: "api/document/3",
+				url: "api/document/3",
 				beforeSend: function( xhr ) {
 					xhr.setRequestHeader("Authorization", "Basic " + btoa(sessionStorage.getItem('username') + ":" + ""));
 				}
@@ -158,6 +158,45 @@
 
 
 	});
+
+		function funcShare() {
+
+			var emailChecked = $('#emailcheckbox').is(":checked");
+			var telephoneChecked = $('#telephone').is(":checked");
+			var ibanChecked = $('#iban').is(":checked");
+			var cpChecked = $('#cp').is(":checked");
+			var amountsChecked = $('#amounts').is(":checked");
+
+			
+			var url = '/api/Document/Share';
+			var blacklines = "";
+
+
+			/*{
+				"Email": "Test@Test.com",
+					"AutoDetects": ["Money", "PostalCode"],
+					"CustomBlackLines": null
+			}*/
+
+			// Send the data using post
+			var posting = $.post(url, { id: username, email: password, blacklines: blacklines });
+
+			// Put the results in a div
+			posting.done(function (data) {
+				sessionStorage.setItem('username', username);
+
+				window.location.href = "/receiverView.html";
+			});
+
+			posting.fail(function( data ) {
+				var content = data.responseJSON.Message;
+				$("#result").empty().append(content);
+			});
+
+			alert('Your document has been shared :)');
+		}
+
+
 </script>
 
 
