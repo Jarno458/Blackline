@@ -15,4 +15,9 @@
     <password>management</password>
     <level>3</level>
   </user>
+	<user>
+		<userName>horses@horses.nl</userName>
+		<password>horses</password>
+		<level>3</level>
+	</user>
 </users>
