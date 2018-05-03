@@ -17,11 +17,11 @@
   <nav class="green lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Blackline</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Share Document</a></li>
+        <li><a  href="#" class= "modal-trigger" data-target="modal1" >Share Document</a></li>
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">Share Document</a></li>
+        <li><a  href="#" class= "modal-trigger" data-target="modal1" > Share Document</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
@@ -37,22 +37,83 @@
 	</div>
 
 	
-	
-<!-- Modal Trigger -->
-<button data-target="modal1" class="btn modal-trigger">Modal</button>
-          
 
-<!-- Modal Structure -->
+
+<!-- Modal1 Structure -->
 <div id="modal1" class="modal bottom-sheet">
 	<div class="modal-content">
-		<h4>Modal Header</h4>
-		<p>A bunch of text</p>
+      <div class="container">
+
+        <h4>Share with</h4>
+        <div class="input-field col s6">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+        <div class="col s6">
+
+        <form action="#">
+          <h5>Blackline </h5>
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Telephone</span>
+            </label>
+          </p>
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Email</span>
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Postal Code</span>
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>Amounts</span>
+            </label>
+          </p>
+
+          <p>
+            <label>
+              <input type="checkbox" />
+              <span>IBAN</span>
+            </label>
+          </p>
+
+
+          <a class="waves-effect waves-light btn modal-close" >Share</a>
+
+        </form>
+        </div>
+
+      </div>
+
 	</div>
-	<div class="modal-footer">
-		<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-	</div>
+
 </div>
 
+
+  <!-- Modal2 Structure -->
+  <div id="modal2" class="modal bottom-sheet">
+    <div class="modal-content">
+      <div class="container">
+
+        <h4>Share with</h4>
+        <h5>Blackline </h5>
+
+        </div>
+
+      </div>
+
+
+  </div>
 
   <footer class="page-footer green">
 
